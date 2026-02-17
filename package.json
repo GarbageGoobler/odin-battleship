@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --config webpack.dev.js",
     "test": "jest",
-    "watch": "jest --watch *.js",
+    "watch": "jest --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
