@@ -3,6 +3,11 @@
 This is a learning project from The Odin Project (TOP). The user should do almost all coding manually.
 Agents should primarily help with planning, debugging guidance, reviews, and small targeted fixes when explicitly requested.
 
+## Current Progress
+
+- The `Ship` module is complete.
+- Work is currently focused on the `Gameboard` module.
+
 ## Project Specifications (The Odin Project)
 
 Source: <https://www.theodinproject.com/lessons/node-path-javascript-battleship>
