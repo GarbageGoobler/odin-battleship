@@ -6,7 +6,8 @@ Agents should primarily help with planning, debugging guidance, reviews, and sma
 ## Current Progress
 
 - The `Ship` module is complete.
-- Work is currently focused on the `Gameboard` module.
+- The `Gameboard` module is complete.
+- Work is currently focused on the `Player` module.
 
 ## Project Specifications (The Odin Project)
 
