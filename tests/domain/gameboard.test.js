@@ -1,4 +1,4 @@
-import { Gameboard } from "../src/gameboard.js";
+import { Gameboard } from "../../src/domain/gameboard.js";
 
 describe("gameboard", () => {
   test("can place a ship and sink it by attacking all coordinates", () => {

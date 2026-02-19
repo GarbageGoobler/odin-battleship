@@ -1,5 +1,5 @@
-import { Player } from "../src/player.js";
-import { Gameboard } from "../src/gameboard.js";
+import { Player } from "../../src/domain/player.js";
+import { Gameboard } from "../../src/domain/gameboard.js";
 
 describe("player", () => {
   test.each(["human", "computer"])("stores type: %s", (type) => {
