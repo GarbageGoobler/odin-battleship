@@ -1,11 +1,16 @@
 import { Player } from "../domain/player.js";
 
-export function createGameController() {
+export function createGameController(autoPopulate = true) {
   const human = new Player("human");
   const computer = new Player("computer");
   let currentTurn = "human"; // start with human
   let winner = null;
   let message = "Your turn";
+
+  if (autoPopulate) {
+    populatePlayerShips(human);
+    populatePlayerShips(computer);
+  }
 
   function getState() {
     return {
@@ -58,4 +63,35 @@ export function createGameController() {
   }
 
   return { getState, handleHumanInput, handleComputerTurn };
+}
+
+function populatePlayerShips(player) {
+  const gameboard = player.gameboard;
+  const shipLengths = [2, 3, 3, 4, 5];
+
+  for (const shipLength of shipLengths) {
+    let orientation = "";
+    const effectiveEdgeSize = [gameboard.boardSize, gameboard.boardSize];
+
+    if (Math.random() < 0.5) {
+      orientation = "horizontal";
+      effectiveEdgeSize[1] -= shipLength;
+    } else {
+      orientation = "vertical";
+      effectiveEdgeSize[0] -= shipLength;
+    }
+
+    let placeShipResult = false;
+
+    while (!placeShipResult) {
+      const x = Math.floor(Math.random() * effectiveEdgeSize[0]);
+      const y = Math.floor(Math.random() * effectiveEdgeSize[1]);
+
+      placeShipResult = player.gameboard.placeShip(
+        [x, y],
+        shipLength,
+        orientation,
+      );
+    }
+  }
 }

@@ -26,13 +26,30 @@ describe("gamecontroller", () => {
     expect(typeof state.message).toBe("string");
   });
 
+  test("new game starts with both gameboards populated with standard fleet", () => {
+    const state = createGameController().getState();
+    const expectedLengths = [2, 3, 3, 4, 5];
+
+    const humanLengths = state.human.gameboard.ships
+      .map((ship) => ship.length)
+      .sort((a, b) => a - b);
+    const computerLengths = state.computer.gameboard.ships
+      .map((ship) => ship.length)
+      .sort((a, b) => a - b);
+
+    expect(humanLengths).toEqual(expectedLengths);
+    expect(computerLengths).toEqual(expectedLengths);
+    expect(state.human.gameboard.occupied.size).toBe(17);
+    expect(state.computer.gameboard.occupied.size).toBe(17);
+  });
+
   test("has handleHumanInput method", () => {
     const controller = createGameController();
     expect(typeof controller.handleHumanInput).toBe("function");
   });
 
   test("handleHumanInput returns hit for occupied coordinate", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.computer.gameboard.placeShip([0, 0], 2, "horizontal");
@@ -40,7 +57,7 @@ describe("gamecontroller", () => {
   });
 
   test("handleHumanInput returns miss for empty coordinate", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
@@ -49,7 +66,7 @@ describe("gamecontroller", () => {
   });
 
   test("handleHumanInput returns false when it is not human turn", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
@@ -61,7 +78,7 @@ describe("gamecontroller", () => {
   });
 
   test("handleHumanInput updates message and turn after valid miss", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
@@ -72,7 +89,7 @@ describe("gamecontroller", () => {
   });
 
   test("handleHumanInput sets winner when all computer ships are sunk", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.computer.gameboard.placeShip([0, 0], 1, "horizontal");
@@ -94,7 +111,7 @@ describe("gamecontroller", () => {
   });
 
   test("handleComputerTurn returns miss on empty coordinate", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
@@ -107,7 +124,7 @@ describe("gamecontroller", () => {
   });
 
   test("handleComputerTurn returns hit on occupied coordinate", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
@@ -120,7 +137,7 @@ describe("gamecontroller", () => {
   });
 
   test("handleComputerTurn switches turn back to human after valid attack", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.human.gameboard.placeShip([9, 9], 1, "horizontal");
@@ -135,7 +152,7 @@ describe("gamecontroller", () => {
   });
 
   test("handleComputerTurn sets winner when all human ships are sunk", () => {
-    const controller = createGameController();
+    const controller = createGameController(false);
     const state = controller.getState();
 
     state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
