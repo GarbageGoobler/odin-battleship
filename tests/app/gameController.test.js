@@ -81,4 +81,70 @@ describe("gamecontroller", () => {
     expect(controller.getState().winner).toBe("human");
     expect(controller.getState().message).toBe("You win!");
   });
+
+  test("has handleComputerTurn method", () => {
+    const controller = createGameController();
+    expect(typeof controller.handleComputerTurn).toBe("function");
+  });
+
+  test("handleComputerTurn returns false when it is not computer turn", () => {
+    const controller = createGameController();
+
+    expect(controller.handleComputerTurn()).toBe(false);
+  });
+
+  test("handleComputerTurn returns miss on empty coordinate", () => {
+    const controller = createGameController();
+    const state = controller.getState();
+
+    state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
+    controller.handleHumanInput([0, 0]);
+
+    state.computer.shotsAvailable = [[1, 1]];
+
+    expect(controller.handleComputerTurn()).toBe("miss");
+    expect(state.human.gameboard.attackedCoordinates.has("1,1")).toBe(true);
+  });
+
+  test("handleComputerTurn returns hit on occupied coordinate", () => {
+    const controller = createGameController();
+    const state = controller.getState();
+
+    state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
+    controller.handleHumanInput([0, 0]);
+
+    state.human.gameboard.placeShip([1, 1], 1, "horizontal");
+    state.computer.shotsAvailable = [[1, 1]];
+
+    expect(controller.handleComputerTurn()).toBe("hit");
+  });
+
+  test("handleComputerTurn switches turn back to human after valid attack", () => {
+    const controller = createGameController();
+    const state = controller.getState();
+
+    state.human.gameboard.placeShip([9, 9], 1, "horizontal");
+
+    state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
+    controller.handleHumanInput([0, 0]);
+
+    state.computer.shotsAvailable = [[1, 1]];
+    controller.handleComputerTurn();
+
+    expect(controller.getState().currentTurn).toBe("human");
+  });
+
+  test("handleComputerTurn sets winner when all human ships are sunk", () => {
+    const controller = createGameController();
+    const state = controller.getState();
+
+    state.computer.gameboard.placeShip([9, 9], 1, "horizontal");
+    controller.handleHumanInput([0, 0]);
+
+    state.human.gameboard.placeShip([1, 1], 1, "horizontal");
+    state.computer.shotsAvailable = [[1, 1]];
+
+    expect(controller.handleComputerTurn()).toBe("hit");
+    expect(controller.getState().winner).toBe("computer");
+  });
 });

@@ -38,5 +38,24 @@ export function createGameController() {
     return result;
   }
 
-  return { getState, handleHumanInput };
+  function handleComputerTurn() {
+    if (winner || currentTurn !== "computer") return false;
+
+    const randomCoord = computer.chooseRandomAttackCoordinate();
+
+    const result = computer.attack(human.gameboard, randomCoord);
+
+    message = result === "hit" ? "Computer hits!" : "Computer misses.";
+
+    if (human.gameboard.allShipsSunk()) {
+      winner = "computer";
+      message = "You lose!";
+      return result;
+    }
+
+    currentTurn = "human";
+    return result;
+  }
+
+  return { getState, handleHumanInput, handleComputerTurn };
 }
