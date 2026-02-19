@@ -1,4 +1,4 @@
-import { Ship } from "../src/ship.js";
+import { Ship } from "../../src/domain/ship.js";
 
 describe("Ship", () => {
   test.each([1, 2, 3, 4, 5])("stores length %i correctly", (length) => {
