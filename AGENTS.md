@@ -11,7 +11,8 @@ Agents should primarily help with planning, debugging guidance, reviews, and sma
 
 ## Project Specifications (The Odin Project)
 
-Source: <https://www.theodinproject.com/lessons/node-path-javascript-battleship>
+- Source: <https://www.theodinproject.com/lessons/node-path-javascript-battleship>
+- The UI should follow the Catpuccin color theme specified in `catpuccin_color_style.md`
 
 ### Introduction constraints
 
