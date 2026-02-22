@@ -1,7 +1,13 @@
-const app = document.querySelector("#app");
+import "./styles.css";
+import { renderUI } from "./ui/render.js";
+import { createGameController } from "./app/gameController.js";
 
-if (app) {
-  const status = document.createElement("p");
-  status.textContent = "JavaScript is bundled and running.";
-  app.append(status);
+const appElement = document.querySelector("#app");
+
+if (appElement) {
+  const controller = createGameController();
+  const ui = renderUI(appElement);
+
+  ui.renderLayout();
+  ui.renderState(controller.getState());
 }
