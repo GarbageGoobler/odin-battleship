@@ -36,10 +36,26 @@ export function renderUI(appElement) {
     }
   }
 
-  function renderState(state) {
+  function renderStatus(state) {
     const statusDisplay = appElement.querySelector(".status-display");
     if (!statusDisplay) return;
     statusDisplay.textContent = state.message;
+  }
+
+  function renderAttack([x, y], boardName, result) {
+    const cell = appElement.querySelector(
+      `.cell[data-board="${boardName}"][data-x="${x}"][data-y="${y}"]`,
+    );
+
+    if (!cell) return;
+
+    if (result === "hit") {
+      cell.textContent = "X";
+      cell.classList.add("hit-cell");
+    } else if (result === "miss") {
+      cell.textContent = "•";
+      cell.classList.add("miss-cell");
+    }
   }
 
   function createBoard(boardName) {
@@ -71,5 +87,5 @@ export function renderUI(appElement) {
     return boardSection;
   }
 
-  return { renderLayout, renderState, renderHumanShips };
+  return { renderLayout, renderStatus, renderHumanShips, renderAttack };
 }

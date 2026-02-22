@@ -55,11 +55,11 @@ export function createGameController(autoPopulate = true) {
     if (human.gameboard.allShipsSunk()) {
       winner = "computer";
       message = "You lose!";
-      return result;
+      return { coord: randomCoord, result };
     }
 
     currentTurn = "human";
-    return result;
+    return { coord: randomCoord, result };
   }
 
   return { getState, handleHumanInput, handleComputerTurn };

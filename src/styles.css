@@ -5,6 +5,7 @@
   --ctp-text: #cdd6f4;
   --ctp-lavender: #b4befe;
   --ctp-peach: #fab387;
+  --ctp-red: #f38ba8;
 }
 
 *,
@@ -133,6 +134,21 @@ header h1 {
 
 .occupied-cell {
   background: var(--ctp-lavender);
+}
+
+.hit-cell,
+.miss-cell {
+  font-size: clamp(1rem, 2.2vw, 1.8rem);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.hit-cell {
+  color: var(--ctp-red);
+}
+
+.miss-cell {
+  color: var(--ctp-text);
 }
 
 .cell:hover {

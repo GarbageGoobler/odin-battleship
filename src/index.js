@@ -9,6 +9,7 @@ if (appElement) {
   const ui = renderUI(appElement);
 
   ui.renderLayout();
-  ui.renderState(controller.getState());
+  ui.renderStatus(controller.getState());
   ui.renderHumanShips(controller.getState().human.gameboard);
+  ui.renderAttack([5, 5], "player", "hit");
 }
