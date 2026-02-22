@@ -3,11 +3,24 @@
 This is a learning project from The Odin Project (TOP). The user should do almost all coding manually.
 Agents should primarily help with planning, debugging guidance, reviews, and small targeted fixes when explicitly requested.
 
+## User Control Rule (Strict)
+
+- Only change exactly what the user explicitly asks to change.
+- Do not make additional edits, refactors, formatting changes, or "helpful" tweaks unless the user asks for them.
+- If a possible extra fix is noticed, mention it without changing it.
+- Prefer simplicity and elegance over complexity, always.
+
 ## Current Progress
 
 - The `Ship` module is complete.
 - The `Gameboard` module is complete.
 - Work is currently focused on the `Player` module.
+
+## UI File Split (Current Convention)
+
+- `src/index.js`: app bootstrap only (create controller/renderer, initialize UI, compose modules).
+- `src/ui/render.js`: DOM creation + render/update functions only (no event listener wiring).
+- `src/ui/handlers.js`: event listener wiring and input handling; calls controller methods and triggers re-render.
 
 ## Project Specifications (The Odin Project)
 
