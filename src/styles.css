@@ -131,6 +131,10 @@ header h1 {
   color: var(--ctp-text);
 }
 
+.occupied-cell {
+  background: var(--ctp-lavender);
+}
+
 .cell:hover {
   filter: brightness(1.1);
 }

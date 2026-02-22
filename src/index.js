@@ -10,4 +10,5 @@ if (appElement) {
 
   ui.renderLayout();
   ui.renderState(controller.getState());
+  ui.renderHumanShips(controller.getState().human.gameboard);
 }

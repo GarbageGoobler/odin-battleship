@@ -24,6 +24,18 @@ export function renderUI(appElement) {
     appElement.append(gameBoards);
   }
 
+  function renderHumanShips(humanGameBoard) {
+    for (const key of humanGameBoard.occupied.keys()) {
+      const [x, y] = key.split(",");
+
+      const cell = appElement.querySelector(
+        `.cell[data-board="player"][data-x="${x}"][data-y="${y}"]`,
+      );
+
+      if (cell) cell.classList.add("occupied-cell");
+    }
+  }
+
   function renderState(state) {
     const statusDisplay = appElement.querySelector(".status-display");
     if (!statusDisplay) return;
@@ -59,5 +71,5 @@ export function renderUI(appElement) {
     return boardSection;
   }
 
-  return { renderLayout, renderState };
+  return { renderLayout, renderState, renderHumanShips };
 }
