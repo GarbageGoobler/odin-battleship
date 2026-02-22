@@ -75,10 +75,10 @@ function populatePlayerShips(player) {
 
     if (Math.random() < 0.5) {
       orientation = "horizontal";
-      effectiveEdgeSize[1] -= shipLength;
+      effectiveEdgeSize[0] -= shipLength - 1;
     } else {
       orientation = "vertical";
-      effectiveEdgeSize[0] -= shipLength;
+      effectiveEdgeSize[1] -= shipLength - 1;
     }
 
     let placeShipResult = false;
